@@ -10,6 +10,18 @@ namespace COVIDA
 	{
 		static void Main(string[] args)
 		{
+			Menu menu = new Menu();
+			string input;
+
+			menu.inicio();
+			while (!menu.Salir)
+			{
+				menu.mostrarOpciones();
+				input = Console.ReadLine();
+
+
+			}
+			Console.ReadKey();
 		}
 	}
 }
