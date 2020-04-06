@@ -18,7 +18,14 @@ namespace COVIDA
 			{
 				menu.mostrarOpciones();
 				input = Console.ReadLine();
-
+				switch (input)
+				{
+					case "c":
+						menu.cerrar();
+						break;
+					default:
+						break;
+				}
 
 			}
 			Console.ReadKey();
