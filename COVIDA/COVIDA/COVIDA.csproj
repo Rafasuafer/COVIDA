@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6EA61696-54FF-471F-B573-5137AAFFB750}</ProjectGuid>
+    <ProjectGuid>{B45E502D-5A87-4592-B44F-4D3F8F43C07C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>COVIDA</RootNamespace>
     <AssemblyName>COVIDA</AssemblyName>
@@ -43,7 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Menu.cs" />
+    <Compile Include="Centro.cs" />
+    <Compile Include="Voluntario.cs" />
+    <Compile Include="Donacion.cs" />
+    <Compile Include="Producto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

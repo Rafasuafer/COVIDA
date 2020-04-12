@@ -5,16 +5,31 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace COVIDA
+
+
 {
-    public class Producto
+
+  
+    class Producto
     {
 
+        public enum TipoProd
+        {
+            bebida = 1,
+            alimentoNoPeresedero = 2,
+            alimentoFresco = 3,
+            productoLimpieza = 4,
+            productoHigiene = 5
+
+        }
         #region Atributos
         private int id;
+        private static int ultimoId = 1;
         private string nombre;
         private decimal peso;
-        private decimal precioUnitario;
-        private int tipo;
+        private decimal precio; 
+        private TipoProd tipoProd;
+
 
         #endregion
 
@@ -25,33 +40,28 @@ namespace COVIDA
             get { return nombre; }
             set { nombre = value; }
         }
-
         public decimal Peso
         {
             get { return peso; }
             set { peso = value; }
         }
-        public decimal PrecioUnitario
+        public decimal Precio
         {
-            get { return precioUnitario; }
-            set { precioUnitario = value; }
-        }
-        public int Tipo
-        {
-            get { return tipo; }
+            get { return precio; }
         }
         #endregion
 
-        #region Metodos
 
-        public Producto(int id, string nombre, decimal peso, decimal precioUnitario, int tipo)
+        #region Metodos
+        public Producto(string nombre, decimal peso, decimal precio, TipoProd tipoProd)
         {
-            this.id = id;
+            id = ultimoId++;
             this.nombre = nombre;
             this.peso = peso;
-            this.precioUnitario = precioUnitario;
-            this.tipo = tipo;
+            this.precio = precio;
+            this.tipoProd = tipoProd;
         }
+
         #endregion
     }
 }
