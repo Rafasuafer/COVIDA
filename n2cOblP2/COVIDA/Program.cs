@@ -5,11 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace COVIDA
-{
+{	
 	class Program
-	{
+	{ 
 		static void Main(string[] args)
 		{
+			Menu menu = new Menu();
+			menu.bienvenida();
+
+			menu.inicio();
+			
+			Console.ReadKey();
 		}
 	}
 }
