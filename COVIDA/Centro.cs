@@ -11,29 +11,37 @@ namespace COVIDA
 
         #region Atributos
         private int id;
-        private static int ultimoId = 1;
         private string nombre;
-        private int cantidadVol;
+		private List<Voluntario> voluntarios;
         private string direccion;
-        private int stock;
+		private List<Producto> stock;
 
-        #endregion
+		#endregion
 
-        #region Propiedades
-
-        public string Nombre
+		#region Propiedades
+		public int Id
+		{
+			get { return id; }
+			set { id = value; }
+		}
+		public string Nombre
         {
             get { return nombre; }
-        }
-        public int CantidadVol
-        {
-            get { return cantidadVol; }
-        }
-        public string Direccion
+		}
+		public int cantidadVol
+		{
+			get { return voluntarios.Count; }
+		}
+		public List<Voluntario> Voluntarios
+		{
+			get { return voluntarios; }
+			set { voluntarios = value; }
+		}
+		public string Direccion
         {
             get { return direccion; }
         }
-        public int Stock
+        public List<Producto> Stock
         {
             get { return stock; }
         }
@@ -41,15 +49,16 @@ namespace COVIDA
 
 
         #region Metodos
-        public Centro(string nombre, int cantidadVol, string direccion, int stock)
+        public Centro(string nombre, string direccion)
         {
-            id = ultimoId++;
             this.nombre = nombre;
-            this.cantidadVol = cantidadVol;
             this.direccion = direccion;
-            this.stock = stock;
         }
 
+
+		public void sumarVoluntario(Voluntario nVol){
+			voluntarios.Add(nVol);
+		}
         #endregion
     }
 }

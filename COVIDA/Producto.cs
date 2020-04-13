@@ -16,7 +16,7 @@ namespace COVIDA
         public enum TipoProd
         {
             bebida = 1,
-            alimentoNoPeresedero = 2,
+            alimentoNoPerecedero = 2,
             alimentoFresco = 3,
             productoLimpieza = 4,
             productoHigiene = 5
@@ -44,18 +44,23 @@ namespace COVIDA
         {
             get { return peso; }
             set { peso = value; }
-        }
-        public decimal Precio
-        {
-            get { return precio; }
-        }
-        #endregion
+		}
+		public decimal Precio
+		{
+			get { return precio; }
+		}
+
+		public int Id
+		{
+			get { return id; }
+			set { id = value; }
+		}
+		#endregion
 
 
-        #region Metodos
-        public Producto(string nombre, decimal peso, decimal precio, TipoProd tipoProd)
+		#region Metodos
+		public Producto(string nombre, decimal peso, decimal precio, TipoProd tipoProd)
         {
-            id = ultimoId++;
             this.nombre = nombre;
             this.peso = peso;
             this.precio = precio;

@@ -10,6 +10,7 @@ namespace COVIDA
 		{
 			// Atributos
 			private bool salir;
+			private Data data;
 			// Propiedades
 
 
@@ -32,6 +33,7 @@ namespace COVIDA
 
 			public void inicio()
 			{
+				data = new Data();
 
 				while (!salir)
 				{
@@ -63,17 +65,19 @@ namespace COVIDA
 			public void donaciones()
 			{
 				Console.WriteLine("\n### DONAR ###");
+				Console.ReadKey();
 			}
 
 			public void centros()
 			{
 				Console.WriteLine("\n### CENTROS ###");
-
+				Console.ReadKey();
 			}
 
 			public void buscarDonaciones()
 			{
 				Console.WriteLine("\n### BUSCAR DONACION ###");
+				Console.ReadKey();
 			}
 
 			public void mostrarOpciones()
