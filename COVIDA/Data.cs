@@ -92,7 +92,7 @@ namespace COVIDA
 				voluntarios.Add(nVol);
 			}
 			else{
-			Console.WriteLine("# ERROR: Voluntario ya existente.")
+				Console.WriteLine("# ERROR: Voluntario ya existente.");
 			}
 		}
 	}
