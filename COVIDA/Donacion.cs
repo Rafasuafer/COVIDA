@@ -82,18 +82,18 @@ namespace COVIDA
 
         }
 
-        public string ingresarDonEco(double monto, DateTime fecha)
+       /* public string ingresarDonEco(double monto, DateTime fecha)
         {
             string mensaje="";
             if( monto != 0){
             Donacion donacion = new Donacion(fecha, TipoDon.economica);
-                Sistema agregar = new Sistema();
+                //Sistema agregar = new Sistema();
                 agregar.Donaciones.Add(donacion);
             }else{
                 mensaje = "Ingrese un monto mayor a 0";
             }
             return mensaje;
-        }
+        }*/
 
         public void recibirDonProd(string tipo , string unidades)
         {
