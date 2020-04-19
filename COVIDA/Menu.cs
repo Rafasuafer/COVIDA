@@ -11,6 +11,8 @@ namespace COVIDA
 			// Atributos
 			private bool salir;
 			private Sistema sistema;
+            private Centro centro;
+            private Producto producto;
 			// Propiedades
 
 
@@ -18,7 +20,11 @@ namespace COVIDA
 			public Menu()
 			{
 				salir = false;
+<<<<<<< HEAD
 				Sistema sistema = new Sistema();
+=======
+           // Sistema sistema = new Sistema();
+>>>>>>> donaciones
 			}
             
 			#region Metodos
@@ -93,16 +99,16 @@ namespace COVIDA
         
         public void mostrarTipoDonacion()
         {
-            Console.Write("1 - Economica  ");
-            Console.Write("2 - Producto ");
+            Console.WriteLine("1 - Economica  ");
+            Console.WriteLine("2 - Producto ");
         }
         public void mostrarTipoProducto()
         {
-            Console.Write("1 - Bebida");
-            Console.Write("2 - Alimentos no peresederos");
-            Console.Write("3 - Alimentos frescos");
-            Console.Write("4 - Productos de limpieza");
-            Console.Write("5 - Productos de higiene");
+            Console.WriteLine("1 - Bebida");
+            Console.WriteLine("2 - Alimentos no peresederos");
+            Console.WriteLine("3 - Alimentos frescos");
+            Console.WriteLine("4 - Productos de limpieza");
+            Console.WriteLine("5 - Productos de higiene");
         }
         public void donacionesEconomicas()
         {
@@ -118,8 +124,19 @@ namespace COVIDA
         }
         public void donacionesProductos()
         {
-            string msg = "Elija la categoria de producto a donar";
-            pedirInput(msg);
+            centros();
+            mostrarTipoProducto();
+            string tipoProducto = "Elija la categoria de producto a donar";
+            pedirInput(tipoProducto);
+            string nombre = "Ingrese el nombre del producto";
+            pedirInput(nombre);
+            string cantidad = "Ingrese la cantidad de unidades";
+            pedirInput(cantidad);
+            string peso = "Ingrese el peso promedio de una unidad";
+            pedirInput(peso);
+            DateTime fecha = new DateTime();
+            Donacion donacion = new Donacion(fecha, Donacion.TipoDon.producto);
+            donacion.recibirDonProd(tipoProducto, cantidad);
 
 
 
@@ -135,7 +152,7 @@ namespace COVIDA
                 {
                 mensaje = sistema.Centros[i].Nombre;
                 }
-                //Centro.elCentro(pedirInput(msg));
+                //centro.elCentro(pedirInput(msg));
                 return mensaje;
 			}
 

@@ -8,7 +8,7 @@ namespace COVIDA
 {
     class Donacion
     {
-
+        private Producto producto;
         public enum TipoDon
         {
             economica = 1,
@@ -56,13 +56,13 @@ namespace COVIDA
         {
             DateTime fecha = new DateTime();
             Donacion donacion = new Donacion(fecha, TipoDon.economica);
-            donacion.calcularVale(monto);
-            Console.WriteLine(donacion.calcularVale(monto));
+            donacion.calcularValeEco(monto);
+            Console.WriteLine(donacion.calcularValeEco(monto));
             int elMonto = int.Parse(monto);
             ingresarDonEco(elMonto, fecha);
         }
 
-        public string calcularVale(string montostr)
+        public string calcularValeEco(string montostr)
         {
 
             int monto = int.Parse(montostr);
@@ -82,25 +82,40 @@ namespace COVIDA
                     vale = monto * 0.1;
                 }
             }
-            string mensaje = "Recibie un vale de: $" + vale + "para su proxima compra";
+            string mensaje = "Recibie un vale de: $" + vale + " para su proxima compra";
 
 
             return mensaje;
 
         }
 
-        public string ingresarDonEco(double monto, DateTime fecha)
+       /* public string ingresarDonEco(double monto, DateTime fecha)
         {
             string mensaje="";
             if( monto != 0){
             Donacion donacion = new Donacion(fecha, TipoDon.economica);
-                Sistema agregar = new Sistema();
+                //Sistema agregar = new Sistema();
                 agregar.Donaciones.Add(donacion);
             }else{
                 mensaje = "Ingrese un monto mayor a 0";
             }
             return mensaje;
-        }       
+        }*/
+
+        public void recibirDonProd(string tipo , string unidades)
+        {
+            int cantUnidades = int.Parse(unidades);
+            DateTime fecha = new DateTime();
+            Donacion donacion = new Donacion(fecha, TipoDon.producto);
+            donacion.calcularValeProd(tipo, cantUnidades);
+            Console.WriteLine(calcularValeProd(tipo, cantUnidades));
+        }
+
+        public string calcularValeProd(string tipo, int cantUnidades)
+        {
+            string mensaje = "";
+            return mensaje;
+        }
 
         #endregion
     }

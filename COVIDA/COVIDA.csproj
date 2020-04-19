@@ -44,8 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Centro.cs" />
+<<<<<<< HEAD
     <Compile Include="Sistema.cs" />
+=======
+>>>>>>> donaciones
     <Compile Include="Menu.cs" />
+    <Compile Include="Sistema.cs" />
     <Compile Include="Voluntario.cs" />
     <Compile Include="Donacion.cs" />
     <Compile Include="Producto.cs" />
