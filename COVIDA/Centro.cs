@@ -59,6 +59,23 @@ namespace COVIDA
 		public void sumarVoluntario(Voluntario nVol){
 			voluntarios.Add(nVol);
 		}
+
+        public string elCentro(string idCentro, Sistema sistemas){
+            string mensaje="";
+            int elCentro = int.Parse(idCentro);
+            for(int i = 0; i<sistemas.Centros.Count; i++){
+                bool existe = false;
+                if (elCentro == sistemas.Centros[i].Id){
+                existe = true;
+                mensaje = "Centro seleccionado";
+                }else{
+                mensaje = "El codigo del centro no es valido";
+                }                                                           
+            }
+            return mensaje;
+        }
+
+
         #endregion
     }
 }
