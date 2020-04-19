@@ -18,7 +18,7 @@ namespace COVIDA
 			public Menu()
 			{
 				salir = false;
-            Sistema sistema = new Sistema();
+				Sistema sistema = new Sistema();
 			}
             
 			#region Metodos
@@ -30,11 +30,13 @@ namespace COVIDA
 				Console.WriteLine("| Elianna Fiorina - 181332 |");
 				Console.WriteLine("| Rafael  Suarez  - 250827 |");
 				Console.WriteLine("|--------------------------|");
+				
 			}
 
 			public void inicio()
 			{
 				sistema = new Sistema();
+				
 
 				while (!salir)
 				{

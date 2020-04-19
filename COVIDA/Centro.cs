@@ -47,13 +47,14 @@ namespace COVIDA
         }
         #endregion
 
-
         #region Metodos
         public Centro(string nombre, string direccion)
         {
             this.nombre = nombre;
-            this.direccion = direccion;
-        }
+			this.direccion = direccion;
+			this.voluntarios = new List<Voluntario>();
+			this.stock = new List<Producto>();
+		}
 
 
 		public void sumarVoluntario(Voluntario nVol){
@@ -76,6 +77,11 @@ namespace COVIDA
         }
 
 
-        #endregion
-    }
+		public override string ToString()
+		{
+			return "Centro: " + this.nombre + " | Direccion:"+ this.direccion;
+		}
+
+		#endregion
+	}
 }

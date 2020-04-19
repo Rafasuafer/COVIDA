@@ -12,6 +12,7 @@ namespace COVIDA
 		{
 			Menu menu = new Menu();
 			menu.bienvenida();
+			
 
 			menu.inicio();
 			

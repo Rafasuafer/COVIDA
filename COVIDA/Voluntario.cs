@@ -46,6 +46,12 @@ namespace COVIDA
             this.telefono = telefono;
             this.fechaNac = fechaNac;
         }
-        #endregion
-    }
+
+
+		public override string ToString()
+		{
+			return "Voluntario: " + this.nombre + " | CI: " + this.ci;
+		}
+		#endregion
+	}
 }
