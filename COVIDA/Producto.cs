@@ -24,7 +24,7 @@ namespace COVIDA
         }
         #region Atributos
         private int id;
-        private static int ultimoId = 1;
+        private static int ultimoId = 0;
         private string nombre;
         private decimal peso;
         private decimal precio; 
@@ -55,18 +55,28 @@ namespace COVIDA
 			get { return id; }
 			set { id = value; }
 		}
+		public TipoProd Tipo
+		{
+			get { return tipoProd; }
+		}
 		#endregion
 
 
 		#region Metodos
 		public Producto(string nombre, decimal peso, decimal precio, TipoProd tipoProd)
         {
+			id = ++ultimoId;
             this.nombre = nombre;
             this.peso = peso;
             this.precio = precio;
             this.tipoProd = tipoProd;
         }
 
-        #endregion
-    }
+		public override string ToString()
+		{
+			return "Producto: " + this.nombre + " | Precio Unitario: " + this.precio;
+		}
+
+		#endregion
+	}
 }

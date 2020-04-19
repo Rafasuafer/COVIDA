@@ -72,7 +72,7 @@ namespace COVIDA
 			Voluntario v8 = new Voluntario("Denna", 65465465, 77778888, new DateTime(1988, 9, 21));
 			Voluntario v9 = new Voluntario("Gabriela", 75375375, 99991111, new DateTime(1984, 5, 28));
 			Voluntario v10 = new Voluntario("Karen", 95195195, 15915915, new DateTime(1976, 12, 28));
-			#endregion
+			
 
 			centros[0].sumarVoluntario(v1);
 			centros[0].sumarVoluntario(v6);
@@ -85,6 +85,7 @@ namespace COVIDA
 			centros[3].sumarVoluntario(v9);
 			centros[4].sumarVoluntario(v5);
 			centros[4].sumarVoluntario(v10);
+			#endregion
 
 		}
 
@@ -118,6 +119,47 @@ namespace COVIDA
 			else{
 				Console.WriteLine("# ERROR: Voluntario ya existente.");
 			}
+		}
+
+
+		public List<Producto> getProdsByType(Producto.TipoProd tipo)
+		{
+			List<Producto> productos = new List<Producto>();
+
+			foreach (var item in productos)
+			{
+				if (item.Tipo == tipo){
+					productos.Add(item);
+				}
+			}
+
+			return productos;
+		}
+
+		public Centro getCentroById(int id){
+
+			bool encontrado = false;
+			Centro centro = null;
+			int i = 0;
+			while (!encontrado && i < centros.Count)
+			{
+				if (centros[i].Id == id)
+				{
+					centro = centros[i];
+					encontrado = false;
+				}
+				i++;
+			}
+			return centro;
+		}
+
+		public void newDonacionEcon(Centro centro, int monto){
+
+			DateTime hoy = new DateTime();
+			Donacion donacion = new Donacion(hoy, Donacion.TipoDon.economica /*, centro*/);
+			donacion.Valor = monto;
+		
+
 		}
 	}
 }
