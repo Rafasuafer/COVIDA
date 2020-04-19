@@ -10,7 +10,7 @@ namespace COVIDA
 		{
 			// Atributos
 			private bool salir;
-			private Data data;
+			private Sistema sistema;
 			// Propiedades
 
 
@@ -18,8 +18,9 @@ namespace COVIDA
 			public Menu()
 			{
 				salir = false;
+            Sistema sistema = new Sistema();
 			}
-
+            
 			#region Metodos
 
 			public void bienvenida()
@@ -33,7 +34,7 @@ namespace COVIDA
 
 			public void inicio()
 			{
-				data = new Data();
+				sistema = new Sistema();
 
 				while (!salir)
 				{
@@ -64,14 +65,76 @@ namespace COVIDA
 
 			public void donaciones()
 			{
-				Console.WriteLine("\n### DONAR ###");
-				Console.ReadKey();
+				Console.WriteLine("Selecione el tipo de donacion que desea realizar");
+                mostrarTipoDonacion();
+                string opcion = Console.ReadLine();
+            //string mensaje = "ingrese una opcion correcta";
+
+            switch (opcion)
+            {
+                case "1":
+                    donacionesEconomicas();
+                    break;
+                case "2":
+                    donacionesProductos();
+                    break;
+                default:
+                    break;
+            }
+            
+
+
+
+            Console.ReadKey();
 			}
 
-			public void centros()
+        
+        public void mostrarTipoDonacion()
+        {
+            Console.Write("1 - Economica  ");
+            Console.Write("2 - Producto ");
+        }
+        public void mostrarTipoProducto()
+        {
+            Console.Write("1 - Bebida");
+            Console.Write("2 - Alimentos no peresederos");
+            Console.Write("3 - Alimentos frescos");
+            Console.Write("4 - Productos de limpieza");
+            Console.Write("5 - Productos de higiene");
+        }
+        public void donacionesEconomicas()
+        {
+            centros();
+            string msg = "Ingrese monto a donar en UYU";
+            string monto = pedirInput(msg);
+            DateTime fecha = new DateTime();
+            Donacion donacion = new Donacion(fecha, Donacion.TipoDon.economica);
+            donacion.recibirDonEco(monto);
+            inicio();
+            Console.ReadKey();
+
+        }
+        public void donacionesProductos()
+        {
+            string msg = "Elija la categoria de producto a donar";
+            pedirInput(msg);
+
+
+
+        }
+    
+
+        public string centros()
 			{
-				Console.WriteLine("\n### CENTROS ###");
-				Console.ReadKey();
+                string mensaje = "";
+				string msg = "Seleccione el centro a donar";
+                pedirInput(msg);
+                for(int i = 0; i < sistema.Centros.Count; i++) 
+                {
+                mensaje = sistema.Centros[i].Nombre;
+                }
+                //Centro.elCentro(pedirInput(msg));
+                return mensaje;
 			}
 
 			public void buscarDonaciones()
@@ -102,9 +165,10 @@ namespace COVIDA
 				this.salir = true;
 			}
 
-			#endregion
+        
+
+        #endregion
 
 
-
-		}
+    }
 	}

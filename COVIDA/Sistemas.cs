@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace COVIDA
 {
-	class Data
+	class Sistema
+    
 	{
 		private List<Producto> productos;
 		private List<Donacion> donaciones;
@@ -29,7 +30,7 @@ namespace COVIDA
 			get { return centros; }
 		}
 
-		public Data(){
+		public void Data(){
 
 			productos = new List<Producto>();
 			centros = new List<Centro>();
