@@ -8,13 +8,14 @@ namespace COVIDA
 {
     class Centro
     {
+        private Sistema sistema;
 
         #region Atributos
         private int id;
         private string nombre;
 		private List<Voluntario> voluntarios;
         private string direccion;
-		private List<Producto> stock;
+		private List<Donacion> stock;
 
 		#endregion
 
@@ -41,7 +42,7 @@ namespace COVIDA
         {
             get { return direccion; }
         }
-        public List<Producto> Stock
+        public List<Donacion> Stock
         {
             get { return stock; }
         }
@@ -53,19 +54,22 @@ namespace COVIDA
         {
             this.nombre = nombre;
             this.direccion = direccion;
+            this.voluntarios = new List<Voluntario>();
+            this.stock = new List<Donacion>();
+
         }
 
 
 		public void sumarVoluntario(Voluntario nVol){
-			voluntarios.Add(nVol);
+			//voluntarios.Add(nVol);
 		}
 
-        public string elCentro(string idCentro, Sistema sistemas){
+        public string elCentro(string idCentro){
             string mensaje="";
+            bool existe = false;
             int elCentro = int.Parse(idCentro);
-            for(int i = 0; i<sistemas.Centros.Count; i++){
-                bool existe = false;
-                if (elCentro == sistemas.Centros[i].Id){
+            for(int i = 0; i< sistema.Centros.Count; i++){
+                if (elCentro == sistema.Centros[i].Id){
                 existe = true;
                 mensaje = "Centro seleccionado";
                 }else{
