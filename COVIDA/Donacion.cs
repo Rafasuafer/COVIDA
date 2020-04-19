@@ -17,19 +17,24 @@ namespace COVIDA
         }
         #region Atributos
         private int id;
-        private static int ultimoId = 1;
         private DateTime fecha;
         private TipoDon tipoDon;
+		private Producto prod;
 
 
-        #endregion
+		#endregion
 
-        #region Propiedades
+		#region Propiedades
 
-        public DateTime Fecha
+		public DateTime Fecha
         {
             get { return fecha; }
         }
+		public int Id
+		{
+			set { id = value; }
+			get { return id; }
+		}
         
         #endregion
 
@@ -37,7 +42,6 @@ namespace COVIDA
         #region Metodos
         public Donacion(DateTime fecha, TipoDon tipoDon)
         {
-            id = ultimoId++;
             this.fecha = fecha;
             this.tipoDon = tipoDon;
         }
