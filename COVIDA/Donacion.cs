@@ -9,6 +9,7 @@ namespace COVIDA
     class Donacion
     {
         private Producto producto;
+        private Sistema sistema;
         public enum TipoDon
         {
             economica = 1,
@@ -18,7 +19,7 @@ namespace COVIDA
 		#region Atributos
 		private int id;
 		private static int ultimoId;
-		private int valor;
+		private double valor;
 		private DateTime fecha;
         private TipoDon tipoDon;
 		private Producto prod;
@@ -37,7 +38,7 @@ namespace COVIDA
 			set { id = value; }
 			get { return id; }
 		}
-		public int Valor
+		public double Valor
 		{
 			set { valor = value; }
 			get { return valor; }
@@ -52,68 +53,64 @@ namespace COVIDA
             this.fecha = fecha;
             this.tipoDon = tipoDon;
         }
-        public void recibirDonEco(string monto)
-        {
-            DateTime fecha = new DateTime();
-            Donacion donacion = new Donacion(fecha, TipoDon.economica);
-            donacion.calcularValeEco(monto);
-            Console.WriteLine(donacion.calcularValeEco(monto));
-            int elMonto = int.Parse(monto);
-            ingresarDonEco(elMonto, fecha);
-        }
-
+        
         public string calcularValeEco(string montostr)
         {
 
             int monto = int.Parse(montostr);
             double vale = 0;
+            string mensaje = "";
             if (monto <= 1000)
             {
                 vale = monto * 0.05;
+                mensaje = "Recibie un vale de: $" + vale + " para su proxima compra";
             }
             else
             {
                 if(monto > 1000 && monto <= 2000)
                 {
                     vale = monto * 0.08;
+                    mensaje = "Recibie un vale de: $" + vale + " para su proxima compra";
                 }
                 else
                 {
                     vale = monto * 0.1;
+                    mensaje = "Recibie un vale de: $" + vale + " para su proxima compra";
                 }
             }
-            string mensaje = "Recibie un vale de: $" + vale + " para su proxima compra";
-
-
-            return mensaje;
-
-        }
-
-       /* public string ingresarDonEco(double monto, DateTime fecha)
-        {
-            string mensaje="";
-            if( monto != 0){
-            Donacion donacion = new Donacion(fecha, TipoDon.economica);
-                //Sistema agregar = new Sistema();
-                agregar.Donaciones.Add(donacion);
-            }else{
-                mensaje = "Ingrese un monto mayor a 0";
+            if(vale == 0)
+            {
+                mensaje = "Ingrese un valor mayor a 0";
             }
-            return mensaje;
-        }*/
 
-        public void recibirDonProd(string tipo , string unidades)
-        {
-            int cantUnidades = int.Parse(unidades);
-            DateTime fecha = new DateTime();
-            Donacion donacion = new Donacion(fecha, TipoDon.producto);
-            donacion.calcularValeProd(tipo, cantUnidades);
-            Console.WriteLine(calcularValeProd(tipo, cantUnidades));
+            return mensaje;
+
         }
 
-        public string calcularValeProd(string tipo, int cantUnidades)
+       
+
+        
+
+        public string calcularValeProd(Producto objProducto, int cantUnidades)
         {
+            double valor;
+            double vale;
             string mensaje = "";
+            valor = objProducto.Precio * cantUnidades;
+            if(valor >1000 && valor <= 2000)
+            {
+                vale = valor * 0.1;
+                mensaje = "Recibie un vale de: $" + vale + " para su proxima compra";
+            }
+            if (valor > 2000)
+            {
+                vale = valor * 0.12;
+                mensaje = "Recibie un vale de: $" + vale + " para su proxima compra";
+            }
+            if(valor == 0)
+            {
+                mensaje = "Ingrese una donacion valida";
+            }
             return mensaje;
         }
 
