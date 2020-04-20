@@ -20,11 +20,8 @@ namespace COVIDA
 			public Menu()
 			{
 				salir = false;
-<<<<<<< HEAD
 				Sistema sistema = new Sistema();
-=======
-           // Sistema sistema = new Sistema();
->>>>>>> donaciones
+
 			}
             
 			#region Metodos

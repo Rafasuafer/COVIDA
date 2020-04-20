@@ -52,19 +52,11 @@ namespace COVIDA
         public Centro(string nombre, string direccion)
         {
             this.nombre = nombre;
-<<<<<<< HEAD
-			this.direccion = direccion;
-			this.voluntarios = new List<Voluntario>();
-			this.stock = new List<Producto>();
-		}
-=======
             this.direccion = direccion;
             this.voluntarios = new List<Voluntario>();
             this.stock = new List<Donacion>();
 
         }
->>>>>>> donaciones
-
 
 		public void sumarVoluntario(Voluntario nVol){
 			//voluntarios.Add(nVol);
