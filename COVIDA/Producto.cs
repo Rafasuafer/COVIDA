@@ -27,7 +27,7 @@ namespace COVIDA
         private static int ultimoId = 0;
         private string nombre;
         private decimal peso;
-        private decimal precio; 
+        private int precio; 
         private TipoProd tipoProd;
 
 
@@ -45,7 +45,7 @@ namespace COVIDA
             get { return peso; }
             set { peso = value; }
 		}
-		public decimal Precio
+		public int Precio
 		{
 			get { return precio; }
 		}
@@ -63,7 +63,7 @@ namespace COVIDA
 
 
 		#region Metodos
-		public Producto(string nombre, decimal peso, decimal precio, TipoProd tipoProd)
+		public Producto(string nombre, decimal peso, int precio, TipoProd tipoProd)
         {
 			id = ++ultimoId;
             this.nombre = nombre;

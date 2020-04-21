@@ -13,6 +13,7 @@ namespace COVIDA
 			private Sistema sistema;
             private Centro centro;
             private Producto producto;
+        private Donacion donacion;
 			// Propiedades
 
 
@@ -109,48 +110,42 @@ namespace COVIDA
         }
         public void donacionesEconomicas()
         {
-            centros();
+            Console.WriteLine(mostrarCentro());
+            string selCentro = "Seleccione el centro a donar";
+            pedirInput(selCentro);
+            Centro objCentro = sistema.getCentroById(selCentro);
             string msg = "Ingrese monto a donar en UYU";
             string monto = pedirInput(msg);
-            DateTime fecha = new DateTime();
-            Donacion donacion = new Donacion(fecha, Donacion.TipoDon.economica);
-            donacion.recibirDonEco(monto);
+            centro.recibirDonEco(monto, objCentro);
             inicio();
             Console.ReadKey();
 
         }
         public void donacionesProductos()
         {
-            centros();
+            Console.WriteLine(mostrarCentro());
+            string selCentro = "Seleccione el centro a donar";
+            pedirInput(selCentro);
+            Centro objCentro = sistema.getCentroById(selCentro);
             mostrarTipoProducto();
             string tipoProducto = "Elija la categoria de producto a donar";
             pedirInput(tipoProducto);
-            string nombre = "Ingrese el nombre del producto";
-            pedirInput(nombre);
-            string cantidad = "Ingrese la cantidad de unidades";
-            pedirInput(cantidad);
-            string peso = "Ingrese el peso promedio de una unidad";
-            pedirInput(peso);
-            DateTime fecha = new DateTime();
-            Donacion donacion = new Donacion(fecha, Donacion.TipoDon.producto);
-            donacion.recibirDonProd(tipoProducto, cantidad);
+            Console.WriteLine(mostrarListaProductos());
+            string idProducto = "Ingrese el codigo del producto";
+            pedirInput(idProducto);
+            string unidades = "Ingrese la cantidad de unidades a donar";
+            pedirInput(unidades);
+            Producto objProducto = sistema.getProductoById(idProducto);
+            centro.recibirDonProd(unidades, objProducto, objCentro);
 
 
 
         }
     
 
-        public string centros()
+        public void centros()
 			{
-                string mensaje = "";
-				string msg = "Seleccione el centro a donar";
-                pedirInput(msg);
-                for(int i = 0; i < sistema.Centros.Count; i++) 
-                {
-                mensaje = sistema.Centros[i].Nombre;
-                }
-                //centro.elCentro(pedirInput(msg));
-                return mensaje;
+            
 			}
 
 			public void buscarDonaciones()
@@ -180,8 +175,28 @@ namespace COVIDA
 				Console.WriteLine("Adios!");
 				this.salir = true;
 			}
+        public string mostrarCentro()
+        {
+            string centro = null;
+            foreach (var listaCentro in sistema.Centros)
+            {
+                centro += listaCentro.ToString();
 
+               
+            }
+            return centro;
         
+        }
+        public string mostrarListaProductos()
+        {
+            string productos = null;
+            foreach (var listaProductos in sistema.Productos)
+            {
+                productos += listaProductos.ToString();
+            }
+            return productos;
+        }
+
 
         #endregion
 

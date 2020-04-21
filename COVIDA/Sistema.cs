@@ -136,24 +136,42 @@ namespace COVIDA
 			return productos;
 		}
 
-		public Centro getCentroById(int id){
-
+		public Centro getCentroById(string id){
+            int elId = int.Parse(id);
 			bool encontrado = false;
 			Centro centro = null;
 			int i = 0;
 			while (!encontrado && i < centros.Count)
 			{
-				if (centros[i].Id == id)
+				if (centros[i].Id == elId)
 				{
 					centro = centros[i];
-					encontrado = false;
+					encontrado = true;
 				}
 				i++;
 			}
 			return centro;
 		}
 
-		public void newDonacionEcon(Centro centro, int monto){
+        public Producto getProductoById(string id)
+        {
+            int elId = int.Parse(id);
+            bool encontrado = false;
+            Producto producto = null;
+            int i = 0;
+            while (!encontrado && i < productos.Count)
+            {
+                if (productos[i].Id == elId)
+                {
+                    producto = productos[i];
+                    encontrado = true;
+                }
+                i++;
+            }
+            return producto;
+        }
+
+        public void newDonacionEcon(Centro centro, double monto){
 
 			DateTime hoy = new DateTime();
 			Donacion donacion = new Donacion(hoy, Donacion.TipoDon.economica /*, centro*/);
