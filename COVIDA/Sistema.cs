@@ -9,7 +9,7 @@ namespace COVIDA
 	class Sistema
 	{
 		private List<Producto> productos;
-		private List<Donacion> donaciones;
+		private List<DonacionEconomica> donaciones;
 		private List<Centro> centros;
 		private List<Voluntario> voluntarios;
 
@@ -18,7 +18,7 @@ namespace COVIDA
 			set { productos = value; }
 			get { return productos; }
 		}
-		public List<Donacion> Donaciones
+		public List<DonacionEconomica> Donaciones
 		{
 			set { donaciones = value; }
 			get { return donaciones; }
@@ -28,12 +28,18 @@ namespace COVIDA
 			set { centros = value; }
 			get { return centros; }
 		}
+		public List<Voluntario> Voluntarios
+		{
+			set { voluntarios = value; }
+			get { return voluntarios; }
+		}
 
 		public Sistema(){
 
 			productos = new List<Producto>();
 			centros = new List<Centro>();
-			donaciones = new List<Donacion>();
+			donaciones = new List<DonacionEconomica>();
+			voluntarios = new List<Voluntario>();
 			precarga();
 		}
 
@@ -137,7 +143,7 @@ namespace COVIDA
 		}
 
 		public Centro getCentroById(string id){
-            int elId = int.Parse(id);
+            int elId = Int32.Parse(id);
 			bool encontrado = false;
 			Centro centro = null;
 			int i = 0;
@@ -155,7 +161,7 @@ namespace COVIDA
 
         public Producto getProductoById(string id)
         {
-            int elId = int.Parse(id);
+            int elId = Int32.Parse(id);
             bool encontrado = false;
             Producto producto = null;
             int i = 0;
@@ -170,14 +176,17 @@ namespace COVIDA
             }
             return producto;
         }
-
-        public void newDonacionEcon(Centro centro, double monto){
-
-			DateTime hoy = new DateTime();
-			Donacion donacion = new Donacion(hoy, Donacion.TipoDon.economica /*, centro*/);
-			donacion.Valor = monto;
 		
+		public string getStrVoluntariosCentro(string cId){
+			
+			Centro centro = getCentroById(cId);
+			string strVoluntarios = "";
+			foreach (var voluntario in centro.Voluntarios)
+			{
+				strVoluntarios += voluntario.ToString() + "\n";
+			}
 
+			return strVoluntarios;
 		}
 	}
 }
