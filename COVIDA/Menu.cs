@@ -149,7 +149,7 @@ namespace COVIDA
             string productos = null;
             foreach (var listaProductos in sistema.Productos)
             {
-                productos += listaProductos.ToString();
+                productos += listaProductos.ToString() + "\n";
             }
             return productos;
         }
