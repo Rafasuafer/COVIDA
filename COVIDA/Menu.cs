@@ -11,9 +11,6 @@ namespace COVIDA
 			// Atributos
 			private bool salir;
 			private Sistema sistema;
-            private Centro centro;
-            private Producto producto;
-        private Donacion donacion;
 			// Propiedades
 
 
@@ -53,7 +50,6 @@ namespace COVIDA
 							donaciones();
 							break;
 						case "2":
-							centros();
 							break;
 						case "3":
 							buscarDonaciones();
@@ -79,10 +75,8 @@ namespace COVIDA
             switch (opcion)
             {
                 case "1":
-                    donacionesEconomicas();
                     break;
                 case "2":
-                    donacionesProductos();
                     break;
                 default:
                     break;
@@ -108,45 +102,7 @@ namespace COVIDA
             Console.WriteLine("4 - Productos de limpieza");
             Console.WriteLine("5 - Productos de higiene");
         }
-        public void donacionesEconomicas()
-        {
-            Console.WriteLine(mostrarCentro());
-            string selCentro = "Seleccione el centro a donar";
-            pedirInput(selCentro);
-            Centro objCentro = sistema.getCentroById(selCentro);
-            string msg = "Ingrese monto a donar en UYU";
-            string monto = pedirInput(msg);
-            centro.recibirDonEco(monto, objCentro);
-            inicio();
-            Console.ReadKey();
-
-        }
-        public void donacionesProductos()
-        {
-            Console.WriteLine(mostrarCentro());
-            string selCentro = "Seleccione el centro a donar";
-            pedirInput(selCentro);
-            Centro objCentro = sistema.getCentroById(selCentro);
-            mostrarTipoProducto();
-            string tipoProducto = "Elija la categoria de producto a donar";
-            pedirInput(tipoProducto);
-            Console.WriteLine(mostrarListaProductos());
-            string idProducto = "Ingrese el codigo del producto";
-            pedirInput(idProducto);
-            string unidades = "Ingrese la cantidad de unidades a donar";
-            pedirInput(unidades);
-            Producto objProducto = sistema.getProductoById(idProducto);
-            centro.recibirDonProd(unidades, objProducto, objCentro);
-
-
-
-        }
-    
-
-        public void centros()
-			{
-            
-			}
+        
 
 			public void buscarDonaciones()
 			{
