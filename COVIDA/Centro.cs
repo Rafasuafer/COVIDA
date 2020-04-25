@@ -41,6 +41,7 @@ namespace COVIDA
         {
             get { return direccion; }
         }
+
         public List<DonacionProducto> Stock
         {
             get { return stock; }
@@ -55,7 +56,6 @@ namespace COVIDA
             this.direccion = direccion;
             this.voluntarios = new List<Voluntario>();
             this.stock = new List<DonacionProducto>();
-
         }
 
 		public bool sumarVoluntario(Voluntario nVol){
@@ -99,7 +99,7 @@ namespace COVIDA
 
 		public override string ToString()
 		{
-			return "Centro: " + this.nombre + " | Direccion:"+ this.direccion;
+			return "Id: " + this.id + "Centro: " + this.nombre + " | Direccion:"+ this.direccion;
 		}
 
         #endregion

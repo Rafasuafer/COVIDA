@@ -11,6 +11,7 @@ namespace COVIDA
 			// Atributos
 			private bool salir;
 			private Sistema sistema;
+
 			// Propiedades
 
 
@@ -47,12 +48,14 @@ namespace COVIDA
 					switch (input)
 					{
 						case "1":
-							donaciones();
+							altaProducto();
 							break;
 						case "2":
+						VoluntarioPorCentros();
+
 							break;
 						case "3":
-							buscarDonaciones();
+							buscarProductos();
 							break;
 						case "s":
 							cerrar();
@@ -64,57 +67,40 @@ namespace COVIDA
 				}
 			}
 
-
-			public void donaciones()
+			public void buscarProductos()
 			{
-				Console.WriteLine("Selecione el tipo de donacion que desea realizar");
-                mostrarTipoDonacion();
-                string opcion = Console.ReadLine();
-            //string mensaje = "ingrese una opcion correcta";
-
-            switch (opcion)
-            {
-                case "1":
-                    break;
-                case "2":
-                    break;
-                default:
-                    break;
-            }
-            
-
-
-
-            Console.ReadKey();
-			}
-
-        
-        public void mostrarTipoDonacion()
-        {
-            Console.WriteLine("1 - Economica  ");
-            Console.WriteLine("2 - Producto ");
-        }
-        public void mostrarTipoProducto()
-        {
-            Console.WriteLine("1 - Bebida");
-            Console.WriteLine("2 - Alimentos no peresederos");
-            Console.WriteLine("3 - Alimentos frescos");
-            Console.WriteLine("4 - Productos de limpieza");
-            Console.WriteLine("5 - Productos de higiene");
-        }
-        
-
-			public void buscarDonaciones()
-			{
-				Console.WriteLine("\n### BUSCAR DONACION ###");
+                Console.WriteLine("Los productos para donar son: ");
+              				
+                Console.WriteLine(mostrarListaProductos());
 				Console.ReadKey();
 			}
+            public void altaProducto()
+            {
+            mostrarTipoProducto();
+            string tipo = "Ingrese el codigo del tipo de producto: ";
+            pedirInput(tipo);
+            string nombre = "Ingrese el nombre del proudcto: ";
+            pedirInput(nombre);
+            string peso = "Ingrese el peso en Kg de una unidad del producto: ";
+            pedirInput(peso);
+            string precio = "Ingrese el precio promedio unitario del producto: ";
+            pedirInput(precio);
+            //agregarDonacion(tipo, nombre, peso, precio);
+            }
+             public void mostrarTipoProducto(){
+                Console.WriteLine("1 - Bebida");
+                Console.WriteLine("2 - Alimento no peresedero");
+                Console.WriteLine("3 - Alimento fresco");
+                Console.WriteLine("4 - Productos de limpieza");
+                Console.WriteLine("5 - Productos de higiene");
+             }
+
 
 			public void mostrarOpciones()
 			{
-				Console.WriteLine("1 - Donar");
-				Console.WriteLine("2 - Ver Centros");
-				Console.WriteLine("3 - Ver Donaciones");
+				Console.WriteLine("1 - Alta Producto");
+				Console.WriteLine("2 - Ver Voluntarios");
+				Console.WriteLine("3 - Ver Producto a donar");
 				Console.WriteLine("s - SALIR");
 			}
 
@@ -143,12 +129,28 @@ namespace COVIDA
             return centro;
         
         }
+        public void VoluntarioPorCentros()
+        {
+            Console.WriteLine(mostrarCentro());
+            string idCentro = "Seleccione el id del centro";
+            string elId = pedirInput(idCentro);
+            string elCentro = sistema.getStrVoluntariosCentro(elId);
+            Console.WriteLine(elCentro);
+            inicio();
+
+            Console.ReadKey();
+
+
+
+
+        }
+
         public string mostrarListaProductos()
         {
             string productos = null;
             foreach (var listaProductos in sistema.Productos)
             {
-                productos += listaProductos.ToString();
+                productos += listaProductos.ToString() + "\n";
             }
             return productos;
         }
