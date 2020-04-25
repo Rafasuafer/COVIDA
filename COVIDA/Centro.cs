@@ -13,7 +13,7 @@ namespace COVIDA
         private string nombre;
 		private List<Voluntario> voluntarios;
         private string direccion;
-		private List<Donacion> stock;
+		private List<DonacionEconomica> stock;
 
 		#endregion
 
@@ -40,7 +40,7 @@ namespace COVIDA
         {
             get { return direccion; }
         }
-        public List<Donacion> Stock
+        public List<DonacionEconomica> Stock
         {
             get { return stock; }
         }
@@ -52,7 +52,7 @@ namespace COVIDA
             this.nombre = nombre;
             this.direccion = direccion;
             this.voluntarios = new List<Voluntario>();
-            this.stock = new List<Donacion>();
+            this.stock = new List<DonacionEconomica>();
 
         }
 
@@ -62,7 +62,7 @@ namespace COVIDA
 
    		public override string ToString()
 		{
-			return "Centro: " + this.nombre + " | Direccion:"+ this.direccion;
+			return "Id: " + this.id + "Centro: " + this.nombre + " | Direccion:"+ this.direccion;
 		}
 
         #endregion

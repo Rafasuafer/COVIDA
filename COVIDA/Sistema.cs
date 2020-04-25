@@ -143,7 +143,7 @@ namespace COVIDA
 		}
 
 		public Centro getCentroById(string id){
-            int elId = Int32.Parse(id);
+            int elId = int.Parse(id);
 			bool encontrado = false;
 			Centro centro = null;
 			int i = 0;
