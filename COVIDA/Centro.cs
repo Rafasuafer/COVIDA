@@ -10,10 +10,11 @@ namespace COVIDA
     {
         #region Atributos
         private int id;
+		private static int ultimoId = 0;
         private string nombre;
 		private List<Voluntario> voluntarios;
         private string direccion;
-		private List<Donacion> stock;
+		private List<DonacionProducto> stock;
 
 		#endregion
 
@@ -40,7 +41,7 @@ namespace COVIDA
         {
             get { return direccion; }
         }
-        public List<Donacion> Stock
+        public List<DonacionProducto> Stock
         {
             get { return stock; }
         }
@@ -49,18 +50,54 @@ namespace COVIDA
         #region Metodos
         public Centro(string nombre, string direccion)
         {
+			this.id = ultimoId++;
             this.nombre = nombre;
             this.direccion = direccion;
             this.voluntarios = new List<Voluntario>();
-            this.stock = new List<Donacion>();
+            this.stock = new List<DonacionProducto>();
 
         }
 
-		public void sumarVoluntario(Voluntario nVol){
-			voluntarios.Add(nVol);
+		public bool sumarVoluntario(Voluntario nVol){
+			bool added = false;
+			if (!registrado(nVol))
+			{
+				voluntarios.Add(nVol);
+				added = true;
+			}
+
+			return added;
 		}
 
-   		public override string ToString()
+		public bool registrado(Voluntario vol){
+			bool encontrado = false;
+			int i = 0;
+			while (!encontrado & i < voluntarios.Count)
+			{
+				if (voluntarios[i].Ci == vol.Ci)
+				{
+					encontrado = true;
+				}
+				i++;
+			}
+			return encontrado;
+		}
+		public bool registrado(int ci)
+		{
+			bool encontrado = false;
+			int i = 0;
+			while (!encontrado & i < voluntarios.Count)
+			{
+				if (voluntarios[i].Ci == ci)
+				{
+					encontrado = true;
+				}
+				i++;
+			}
+			return encontrado;
+		}
+
+		public override string ToString()
 		{
 			return "Centro: " + this.nombre + " | Direccion:"+ this.direccion;
 		}
