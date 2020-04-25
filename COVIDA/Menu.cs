@@ -11,7 +11,7 @@ namespace COVIDA
 			// Atributos
 			private bool salir;
 			private Sistema sistema;
-   
+
 			// Propiedades
 
 
@@ -51,7 +51,8 @@ namespace COVIDA
 							altaProducto();
 							break;
 						case "2":
-							VoluntarioPorCentros();
+						VoluntarioPorCentros();
+
 							break;
 						case "3":
 							buscarProductos();

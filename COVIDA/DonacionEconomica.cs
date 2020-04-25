@@ -8,9 +8,9 @@ namespace COVIDA
 {
     class DonacionEconomica
     {
-       		#region Atributos
+       	#region Atributos
 		private int id;
-		private static int ultimoId = 1;
+		private static int ultimoId = 0;
 		private double valor;
 		private DateTime fecha;
 		#endregion
