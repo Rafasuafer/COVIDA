@@ -40,6 +40,7 @@ namespace COVIDA
 		{
 			id = ultimoId++;
 			this.fecha = new DateTime();
+			valor = 0;
 		}
 		public DonacionEconomica(double monto)
 		{

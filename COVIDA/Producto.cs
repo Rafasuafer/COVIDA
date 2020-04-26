@@ -66,7 +66,7 @@ namespace COVIDA
 		public Producto(string nombre, decimal peso, int precio, TipoProd tipoProd)
         {
 			id = ++ultimoId;
-            this.nombre = nombre;
+            this.nombre = nombre.ToUpper();
             this.peso = peso;
             this.precio = precio;
             this.tipoProd = tipoProd;

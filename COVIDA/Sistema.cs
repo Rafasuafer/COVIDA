@@ -49,9 +49,25 @@ namespace COVIDA
 
 		}
 
-
-		public void nuevoProducto(Producto nProd){
-			productos.Add(nProd);
+		public bool nuevoProducto(Producto nProd){
+			bool agregado = false;
+			bool peso = nProd.Peso > 0;
+			bool precio = nProd.Precio > 0;
+			bool encontrado = false;
+			int i = 0;
+			while (!encontrado && i < productos.Count)
+			{
+				if (productos[i].Nombre == nProd.Nombre)
+				{
+					encontrado = true;
+				}
+				i++;
+			}
+			if (precio && peso && !encontrado)
+			{
+				productos.Add(nProd);
+			}
+			return agregado;
 		}
 
 		public void nuevoCentro(Centro nCen)
@@ -132,10 +148,11 @@ namespace COVIDA
 		public string getStrVoluntariosCentro(string cId){
 			
 			Centro centro = getCentroById(cId);
-			string strVoluntarios = "";
-			foreach (var voluntario in centro.Voluntarios)
+			string strVoluntarios = "### CENTRO INEXISTENTE ###";
+
+			if (centro != null)
 			{
-				strVoluntarios += voluntario.ToString() + "\n";
+				strVoluntarios = centro.getStrVoluntarios();
 			}
 
 			return strVoluntarios;
@@ -153,7 +170,8 @@ namespace COVIDA
 			nuevoProducto(new Producto("Leche en polvo", 1, 110, Producto.TipoProd.alimentoNoPerecedero));
 			nuevoProducto(new Producto("Lata choclo", 1, 30, Producto.TipoProd.alimentoNoPerecedero));
 			nuevoProducto(new Producto("Lata arvejas", 1, 30, Producto.TipoProd.alimentoNoPerecedero));
-			nuevoProducto(new Producto("Coquita en botella de vidrio :)", 1, 110, Producto.TipoProd.bebida));
+			nuevoProducto(new Producto("Lata arvejas", 1, 30, Producto.TipoProd.alimentoNoPerecedero));
+			nuevoProducto(new Producto("Coquita en botella de vidrio :)", 0, 110, Producto.TipoProd.bebida));
 
 		}
 
@@ -190,10 +208,29 @@ namespace COVIDA
 			centros[4].sumarVoluntario(v5);
 			centros[4].sumarVoluntario(v10);
 		}
-	}
-        public void getStrDonacionbyFecha(string fecha)
-    {
-        
-    }
 
+		public string getStrDonacionByFecha(DateTime fecha)
+		{
+			string strDonaciones = "## DONACIONES POR FECHA ## \n";
+
+			foreach (Centro centro in centros)
+			{
+				strDonaciones += "CENTRO: " + centro.Nombre;
+
+				if (centro.Stock.Count > 0)
+				{
+					strDonaciones += "donaciones recibidas: " + centro.Stock.Count + "\n";
+				}
+				else{
+					strDonaciones += "NO HAY DONACIONES";
+				}
+				
+			}
+
+			return strDonaciones;
+		}
+
+
+	}
+    
 }

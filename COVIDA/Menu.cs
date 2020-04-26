@@ -148,9 +148,11 @@ namespace COVIDA
 
         public void donacionesPorFecha()
         {
-            string fecha = "Ingrese la fecha - dd/mm/aaaa";
-            pedirInput(fecha);
-            string laDonacion = sistema.getStrDonacionbyFecha(pedirInput(fecha));
+			int.TryParse(pedirInput("Ingrese dia"), out int dia);
+			int.TryParse(pedirInput("Ingrese mes"), out int mes);
+			int.TryParse(pedirInput("Ingrese año"), out int año);
+
+			string laDonacion = sistema.getStrDonacionByFecha(new DateTime(año, mes, dia));
             Console.WriteLine(laDonacion);
         }
 

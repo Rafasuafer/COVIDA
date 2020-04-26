@@ -14,7 +14,7 @@ namespace COVIDA
         private string nombre;
 		private List<Voluntario> voluntarios;
         private string direccion;
-		private List<DonacionProducto> stock;
+		private List<DonacionEconomica> stock;
 
 		#endregion
 
@@ -42,7 +42,7 @@ namespace COVIDA
             get { return direccion; }
         }
 
-        public List<DonacionProducto> Stock
+        public List<DonacionEconomica> Stock
         {
             get { return stock; }
         }
@@ -52,10 +52,10 @@ namespace COVIDA
         public Centro(string nombre, string direccion)
         {
 			this.id = ultimoId++;
-            this.nombre = nombre;
+            this.nombre = nombre.ToUpper();
             this.direccion = direccion;
             this.voluntarios = new List<Voluntario>();
-            this.stock = new List<DonacionProducto>();
+            this.stock = new List<DonacionEconomica>();
         }
 
 		public bool sumarVoluntario(Voluntario nVol){
@@ -101,6 +101,23 @@ namespace COVIDA
 		{
 			return "Id: " + this.id + "Centro: " + this.nombre + " | Direccion:"+ this.direccion;
 		}
+
+		public string getStrVoluntarios(){
+			string strVoluntarios = "";
+			if (voluntarios.Count > 0)
+			{
+				foreach (var voluntario in voluntarios)
+				{
+					strVoluntarios += voluntario.ToString() + "\n";
+				}
+			}
+			else
+			{
+				strVoluntarios = "# No hay voluntarios registrados.";
+			}
+			return strVoluntarios;
+		}
+		
 
         #endregion
     }
