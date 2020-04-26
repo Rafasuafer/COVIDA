@@ -29,21 +29,16 @@ namespace COVIDA
 		{
 			this.productos = productos;
 			base.Fecha = fecha;
+			foreach (Producto prod in productos)
+			{
+				Valor += prod.Precio;
+			}
 		}
 		public DonacionProducto(List<Producto> productos) : base()
         {
 			this.productos = productos;
         }
         
-        public override double calcularVale()
-		{
-			double vale = 0;
-
-			// TODO
-
-			return vale;
-
-        }
         #endregion
     }
 }
