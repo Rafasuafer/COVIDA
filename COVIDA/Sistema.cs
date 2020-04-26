@@ -191,4 +191,9 @@ namespace COVIDA
 			centros[4].sumarVoluntario(v10);
 		}
 	}
+        public void getStrDonacionbyFecha(string fecha)
+    {
+        
+    }
+
 }

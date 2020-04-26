@@ -51,13 +51,16 @@ namespace COVIDA
 							altaProducto();
 							break;
 						case "2":
-						VoluntarioPorCentros();
+						    VoluntarioPorCentros();
 
 							break;
 						case "3":
 							buscarProductos();
 							break;
-						case "s":
+                        case "4":
+                            donacionesPorFecha();
+                            break;
+                        case "s":
 							cerrar();
 							break;
 						default:
@@ -67,15 +70,24 @@ namespace COVIDA
 				}
 			}
 
-			public void buscarProductos()
+
+			public void mostrarOpciones()
 			{
-                Console.WriteLine("Los productos para donar son: ");
-              				
-                Console.WriteLine(mostrarListaProductos());
-				Console.ReadKey();
+				Console.WriteLine("1 - Alta Producto");
+				Console.WriteLine("2 - Ver Voluntarios");
+				Console.WriteLine("3 - Ver Producto a donar");
+                Console.WriteLine("4 - Ver Donaciones por fecha");
+                Console.WriteLine("s - SALIR");
 			}
-            public void altaProducto()
-            {
+        public void buscarProductos()
+        {
+            Console.WriteLine("Los productos para donar son: ");
+
+            Console.WriteLine(mostrarListaProductos());
+            Console.ReadKey();
+        }
+        public void altaProducto()
+        {
             mostrarTipoProducto();
             string tipo = "Ingrese el codigo del tipo de producto: ";
             pedirInput(tipo);
@@ -86,25 +98,17 @@ namespace COVIDA
             string precio = "Ingrese el precio promedio unitario del producto: ";
             pedirInput(precio);
             //agregarDonacion(tipo, nombre, peso, precio);
-            }
-             public void mostrarTipoProducto(){
-                Console.WriteLine("1 - Bebida");
-                Console.WriteLine("2 - Alimento no peresedero");
-                Console.WriteLine("3 - Alimento fresco");
-                Console.WriteLine("4 - Productos de limpieza");
-                Console.WriteLine("5 - Productos de higiene");
-             }
+        }
+        public void mostrarTipoProducto()
+        {
+            Console.WriteLine("1 - Bebida");
+            Console.WriteLine("2 - Alimento no peresedero");
+            Console.WriteLine("3 - Alimento fresco");
+            Console.WriteLine("4 - Productos de limpieza");
+            Console.WriteLine("5 - Productos de higiene");
+        }
 
-
-			public void mostrarOpciones()
-			{
-				Console.WriteLine("1 - Alta Producto");
-				Console.WriteLine("2 - Ver Voluntarios");
-				Console.WriteLine("3 - Ver Producto a donar");
-				Console.WriteLine("s - SALIR");
-			}
-
-			public string pedirInput(string msg)
+        public string pedirInput(string msg)
 			{
 				Console.WriteLine(msg);
 				string input = Console.ReadLine();
@@ -140,9 +144,14 @@ namespace COVIDA
 
             Console.ReadKey();
 
+        }
 
-
-
+        public void donacionesPorFecha()
+        {
+            string fecha = "Ingrese la fecha - dd/mm/aaaa";
+            pedirInput(fecha);
+            string laDonacion = sistema.getStrDonacionbyFecha(pedirInput(fecha));
+            Console.WriteLine(laDonacion);
         }
 
         public string mostrarListaProductos()
