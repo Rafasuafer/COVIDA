@@ -102,9 +102,9 @@ namespace COVIDA
 
 			foreach (var item in productos)
 			{
-				if (item.Tipo == tipo){
+				/*if (item.TipoProd == tipo){
 					productos.Add(item);
-				}
+				}*/
 			}
 
 			return productos;

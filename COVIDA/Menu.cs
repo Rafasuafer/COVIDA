@@ -88,17 +88,120 @@ namespace COVIDA
         }
         public void altaProducto()
         {
+            Console.WriteLine("\n# ALTA PRODUCTO #");
+
+            string mensaje = "";
             mostrarTipoProducto();
             string tipo = "Ingrese el codigo del tipo de producto: ";
-            pedirInput(tipo);
+            int elTipo;
+            int.TryParse(pedirInput(tipo), out elTipo);
+            while (!validarTipo(elTipo))
+            {
+                Console.WriteLine("#ERROR: Ingrese un tipo valido!");
+                mostrarTipoProducto();
+                elTipo = int.Parse(pedirInput(tipo));
+            }
             string nombre = "Ingrese el nombre del proudcto: ";
-            pedirInput(nombre);
+            string elNombre = pedirInput(nombre);
+            if (validarNombre(elNombre))
+            {
+                Console.WriteLine("#ERROR: El nombre ya existe");
+                elNombre = pedirInput(nombre);
+            }
             string peso = "Ingrese el peso en Kg de una unidad del producto: ";
-            pedirInput(peso);
+            int elPeso;
+            Int32.TryParse(pedirInput(peso), out elPeso);
+            if (!validarPeso(elPeso))
+            {
+                Console.WriteLine("#ERROR: Ingrese un valor mayor a 0");
+                elPeso = int.Parse(pedirInput(peso));
+            }
             string precio = "Ingrese el precio promedio unitario del producto: ";
-            pedirInput(precio);
-            //agregarDonacion(tipo, nombre, peso, precio);
+            int elPrecio;
+            Int32.TryParse(pedirInput(precio), out elPrecio);
+            if (!validarPrecio(elPrecio))
+            {
+                Console.WriteLine("#ERROR: Ingrese un precio mayor a 0");
+                elPrecio = int.Parse(pedirInput(precio));
+            }
+            Producto.TipoProd tipProd;
+            switch (elTipo)
+            {
+                case 1:
+                    tipProd = Producto.TipoProd.bebida;
+                    break;
+                case 2:
+                    tipProd = Producto.TipoProd.alimentoNoPerecedero;
+                    break;
+                case 3:
+                    tipProd = Producto.TipoProd.alimentoFresco;
+                    break;
+                case 4:
+                    tipProd = Producto.TipoProd.productoLimpieza;
+                    break;
+                case 5:
+                    tipProd = Producto.TipoProd.productoHigiene;
+                    break;
+                default:
+                    tipProd = Producto.TipoProd.noExiste;
+                    break;
+            }
+            if (validarTipo(elTipo) && validarPeso(elPeso) && validarPrecio(elPrecio) && !validarNombre(elNombre))
+            {
+                Producto producto = new Producto(elNombre, elPeso, elPrecio, tipProd);
+                sistema.nuevoProducto(producto);
+                mensaje = "Producto dado de alta correctamente";
+            }
+          
+            Console.WriteLine(mensaje);
         }
+
+        public bool validarTipo(int tipo)
+        {
+            bool existeTipo = false;
+            if (tipo > 0 && tipo < 6)
+            {
+                existeTipo = true;
+            }return existeTipo;
+        }
+        public bool validarPeso(int peso)
+        {
+        bool existePeso = false;
+            if(peso > 0)
+            {
+                existePeso = true;
+            }
+            return existePeso;
+        }
+        public bool validarPrecio(int precio)
+        {
+            bool existePrecio = false;
+            if (precio > 0)
+            {
+                existePrecio = true;
+            }
+            return existePrecio;
+        }
+
+        public bool validarNombre(string nombre)
+        {
+        bool existeNombre = false;
+            int ite = 0;
+            while (ite > sistema.Productos.Count)
+            {
+                if(nombre == sistema.Productos[ite].Nombre)
+                {
+                    existeNombre = true;
+                }
+            }return existeNombre;
+        }
+           /* if(existeTipo && existePrecio && existePeso && !existeNombre)
+            {
+                productoValido = true;
+            }
+            return productoValido;
+        }*/
+
         public void mostrarTipoProducto()
         {
             Console.WriteLine("1 - Bebida");
@@ -116,7 +219,7 @@ namespace COVIDA
 				return input;
 			}
 
-			public void cerrar()
+		public void cerrar()
 			{
 				Console.WriteLine("Adios!");
 				this.salir = true;
@@ -147,12 +250,19 @@ namespace COVIDA
         }
 
         public void donacionesPorFecha()
-        {
+        {/*
 			int.TryParse(pedirInput("Ingrese dia"), out int dia);
 			int.TryParse(pedirInput("Ingrese mes"), out int mes);
-			int.TryParse(pedirInput("Ingrese año"), out int año);
+			int.TryParse(pedirInput("Ingrese año"), out int año);*/
+            DateTime fechaBuscada = new DateTime();
 
-			string laDonacion = sistema.getStrDonacionByFecha(new DateTime(año, mes, dia));
+            while (!DateTime.TryParse(pedirInput("Ingrese fecha en formato: dd-mm-AAAA"), out fechaBuscada))
+            {
+                Console.WriteLine("Formato de fecha incorrecto.");
+            }
+            
+
+			string laDonacion = sistema.getStrDonacionByFecha(fechaBuscada);
             Console.WriteLine(laDonacion);
         }
 

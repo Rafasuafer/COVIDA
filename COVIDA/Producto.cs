@@ -19,16 +19,17 @@ namespace COVIDA
             alimentoNoPerecedero = 2,
             alimentoFresco = 3,
             productoLimpieza = 4,
-            productoHigiene = 5
+            productoHigiene = 5,
+            noExiste = 0
 
         }
         #region Atributos
         private int id;
         private static int ultimoId = 0;
         private string nombre;
-        private decimal peso;
+        private int peso;
         private int precio; 
-        private TipoProd tipoProd;
+        private static TipoProd tipoProd;
 
 
         #endregion
@@ -40,7 +41,7 @@ namespace COVIDA
             get { return nombre; }
             set { nombre = value; }
         }
-        public decimal Peso
+        public int Peso
         {
             get { return peso; }
             set { peso = value; }
@@ -55,21 +56,17 @@ namespace COVIDA
 			get { return id; }
 			set { id = value; }
 		}
-		public TipoProd Tipo
-		{
-			get { return tipoProd; }
-		}
+
 		#endregion
 
 
 		#region Metodos
-		public Producto(string nombre, decimal peso, int precio, TipoProd tipoProd)
+		public Producto(string nombre, int peso, int precio, TipoProd tipoProd)
         {
 			id = ++ultimoId;
             this.nombre = nombre.ToUpper();
             this.peso = peso;
             this.precio = precio;
-            this.tipoProd = tipoProd;
         }
 
 		public override string ToString()
