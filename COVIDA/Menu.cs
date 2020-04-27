@@ -19,7 +19,7 @@ namespace COVIDA
 			public Menu()
 			{
 				salir = false;
-				Sistema sistema = new Sistema();
+				sistema = new Sistema();
 
 			}
             
@@ -37,8 +37,6 @@ namespace COVIDA
 
 			public void inicio()
 			{
-				sistema = new Sistema();
-				
 
 				while (!salir)
 				{
@@ -71,7 +69,7 @@ namespace COVIDA
 			}
 
 
-			public void mostrarOpciones()
+		public void mostrarOpciones()
 			{
 				Console.WriteLine("1 - Alta Producto");
 				Console.WriteLine("2 - Ver Voluntarios");
@@ -84,7 +82,6 @@ namespace COVIDA
             Console.WriteLine("Los productos para donar son: ");
 
             Console.WriteLine(mostrarListaProductos());
-            Console.ReadKey();
         }
         public void altaProducto()
         {
@@ -103,7 +100,7 @@ namespace COVIDA
             }
             string nombre = "Ingrese el nombre del proudcto: ";
             string elNombre = pedirInput(nombre);
-            if (validarNombre(elNombre))
+            if (sistema.getProductoByNombre(elNombre) != null)
             {
                 Console.WriteLine("#ERROR: El nombre ya existe");
                 elNombre = pedirInput(nombre);
@@ -146,11 +143,11 @@ namespace COVIDA
                     tipProd = Producto.TipoProd.noExiste;
                     break;
             }
-            if (validarTipo(elTipo) && validarPeso(elPeso) && validarPrecio(elPrecio) && !validarNombre(elNombre))
+            if (validarTipo(elTipo) && validarPeso(elPeso) && validarPrecio(elPrecio) && (sistema.getProductoByNombre(elNombre) == null) )
             {
                 Producto producto = new Producto(elNombre, elPeso, elPrecio, tipProd);
                 sistema.nuevoProducto(producto);
-                mensaje = "Producto dado de alta correctamente";
+                mensaje = "#EXITO: Producto dado de alta correctamente";
             }
           
             Console.WriteLine(mensaje);
@@ -183,24 +180,7 @@ namespace COVIDA
             return existePrecio;
         }
 
-        public bool validarNombre(string nombre)
-        {
-        bool existeNombre = false;
-            int ite = 0;
-            while (ite > sistema.Productos.Count)
-            {
-                if(nombre == sistema.Productos[ite].Nombre)
-                {
-                    existeNombre = true;
-                }
-            }return existeNombre;
-        }
-           /* if(existeTipo && existePrecio && existePeso && !existeNombre)
-            {
-                productoValido = true;
-            }
-            return productoValido;
-        }*/
+        
 
         public void mostrarTipoProducto()
         {
@@ -229,7 +209,7 @@ namespace COVIDA
             string centro = null;
             foreach (var listaCentro in sistema.Centros)
             {
-                centro += listaCentro.ToString();
+                centro += listaCentro.ToString() + "\n";
 
                
             }
@@ -238,9 +218,11 @@ namespace COVIDA
         }
         public void VoluntarioPorCentros()
         {
+			Console.WriteLine("# CENTROS #");
             Console.WriteLine(mostrarCentro());
             string idCentro = "Seleccione el id del centro";
             string elId = pedirInput(idCentro);
+			Console.WriteLine("# VOLUNTARIOS #");
             string elCentro = sistema.getStrVoluntariosCentro(elId);
             Console.WriteLine(elCentro);
             inicio();
@@ -250,13 +232,10 @@ namespace COVIDA
         }
 
         public void donacionesPorFecha()
-        {/*
-			int.TryParse(pedirInput("Ingrese dia"), out int dia);
-			int.TryParse(pedirInput("Ingrese mes"), out int mes);
-			int.TryParse(pedirInput("Ingrese año"), out int año);*/
+        {
             DateTime fechaBuscada = new DateTime();
 
-            while (!DateTime.TryParse(pedirInput("Ingrese fecha en formato: dd-mm-AAAA"), out fechaBuscada))
+            while (!DateTime.TryParse(pedirInput("Ingrese fecha en formato: mm-dd-AAAA"), out fechaBuscada))
             {
                 Console.WriteLine("Formato de fecha incorrecto.");
             }
@@ -270,7 +249,8 @@ namespace COVIDA
         {
             string productos = "#ERROR: No hay productos";
 			if (sistema.Productos.Count > 0)
-			{ 
+			{
+				productos = "";
 				foreach (var listaProductos in sistema.Productos)
 				{
 					productos += listaProductos.ToString() + "\n";

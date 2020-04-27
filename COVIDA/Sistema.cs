@@ -44,10 +44,12 @@ namespace COVIDA
 		}
 
 		public void precarga(){
+			Console.WriteLine("### INICIO PRECARGA ### \n");
 			cargaProductos();
 			cargaCentros();
 			cargaVoluntarios();
 			cargaDonaciones();
+			Console.WriteLine("\n### FIN PRECARGA ###");
 
 		}
 
@@ -70,7 +72,18 @@ namespace COVIDA
 				productos.Add(nProd);
 			}
 			else{
-				Console.WriteLine("# ERROR: Producto ya existente.");
+				if (encontrado)
+				{
+					Console.WriteLine("# ERROR:" + nProd.Nombre + " Producto ya existente.");
+				}
+				if (!precio)
+				{
+					Console.WriteLine("# ERROR:" + nProd.Nombre + " Precio debe ser mayor a 0");
+				}
+				if (!peso)
+				{
+					Console.WriteLine("# ERROR:" + nProd.Nombre + " Peso debe ser mayor a 0");
+				}
 			}
 			return agregado;
 		}
@@ -116,7 +129,7 @@ namespace COVIDA
 				voluntarios.Add(nVol);
 			}
 			else{
-				Console.WriteLine("# ERROR: Voluntario ya existente.");
+				Console.WriteLine("# ERROR: "+ nVol.Ci + " - Voluntario ya existente.");
 			}
 
 			return !existe;
@@ -153,9 +166,9 @@ namespace COVIDA
 
 			foreach (var item in productos)
 			{
-				/*if (item.TipoProd == tipo){
+				if (item.Tipo == tipo){
 					productos.Add(item);
-				}*/
+				}
 			}
 
 			return productos;
@@ -252,6 +265,7 @@ namespace COVIDA
 			nuevoCentro(new Centro("Blandengues", "Av.Italia y L.A. Herrera"));
 			nuevoCentro(new Centro("Prado", "Aigua y Valdense"));
 			nuevoCentro(new Centro("Maroñas", "Veracierto y Chayos"));
+			nuevoCentro(new Centro("CENTRO VACIO", "Mas abajo que YPF"));
 		}
 		
 		private void cargaVoluntarios(){
@@ -366,7 +380,7 @@ namespace COVIDA
 
 			foreach (Centro centro in centros)
 			{
-				strDonaciones += "CENTRO: " + centro.Nombre + centro.getStrDonacionesFecha(fecha);
+				strDonaciones += "CENTRO: " + centro.Nombre + " " + centro.getStrDonacionesFecha(fecha);
 				
 			}
 

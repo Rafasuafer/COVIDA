@@ -99,7 +99,7 @@ namespace COVIDA
 
 		public override string ToString()
 		{
-			return "Id: " + this.id + "Centro: " + this.nombre + " | Direccion:"+ this.direccion;
+			return "Id: " + this.id + " | Centro: " + this.nombre + " | Direccion: "+ this.direccion;
 		}
 
 		public string getStrVoluntarios(){
@@ -126,7 +126,7 @@ namespace COVIDA
 				int cantidad = 0;
 				foreach (DonacionEconomica donacion in stock)
 				{
-					if (donacion.Fecha == fecha)
+					if (donacion.Fecha.ToShortDateString() == fecha.ToShortDateString())
 					{
 						cantidad++;
 					}

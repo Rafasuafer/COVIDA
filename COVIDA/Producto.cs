@@ -57,6 +57,11 @@ namespace COVIDA
 			set { id = value; }
 		}
 
+		public TipoProd Tipo
+		{
+			get { return tipoProd; }
+		}
+
 		#endregion
 
 

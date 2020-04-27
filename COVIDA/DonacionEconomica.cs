@@ -39,13 +39,13 @@ namespace COVIDA
 		public DonacionEconomica()
 		{
 			id = ultimoId++;
-			this.fecha = new DateTime();
+			this.fecha = DateTime.Now;
 			valor = 0;
 		}
 		public DonacionEconomica(double monto)
 		{
 			id = ultimoId++;
-			this.fecha = new DateTime();
+			this.fecha = DateTime.Now;
 			this.valor = monto;
 		}
 		public DonacionEconomica(double monto, DateTime fecha)

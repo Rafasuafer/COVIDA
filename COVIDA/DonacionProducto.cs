@@ -37,6 +37,7 @@ namespace COVIDA
 		}
 		public DonacionProducto(List<Producto> productos) : base()
         {
+			base.Fecha = DateTime.Now;
 			this.productos = productos;
         }
         
