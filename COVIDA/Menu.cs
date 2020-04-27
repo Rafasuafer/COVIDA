@@ -158,12 +158,15 @@ namespace COVIDA
 
         public string mostrarListaProductos()
         {
-            string productos = null;
-            foreach (var listaProductos in sistema.Productos)
-            {
-                productos += listaProductos.ToString() + "\n";
-            }
-            return productos;
+            string productos = "#ERROR: No hay productos";
+			if (sistema.Productos.Count > 0)
+			{ 
+				foreach (var listaProductos in sistema.Productos)
+				{
+					productos += listaProductos.ToString() + "\n";
+				}
+			}
+			return productos;
         }
 
 
