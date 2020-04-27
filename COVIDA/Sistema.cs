@@ -46,6 +46,8 @@ namespace COVIDA
 		public void precarga(){
 			cargaProductos();
 			cargaCentros();
+			cargaVoluntarios();
+			cargaDonaciones();
 
 		}
 
@@ -67,15 +69,38 @@ namespace COVIDA
 			{
 				productos.Add(nProd);
 			}
+			else{
+				Console.WriteLine("# ERROR: Producto ya existente.");
+			}
 			return agregado;
 		}
 
-		public void nuevoCentro(Centro nCen)
+		public bool nuevoCentro(Centro nCen)
 		{
-			centros.Add(nCen);
+			bool existe = false;
+			int ite = 0;
+			while (ite < voluntarios.Count && !existe)
+			{
+				if (nCen.Id == centros[ite].Id)
+				{
+					existe = true;
+				}
+
+				ite++;
+			}
+
+			if (!existe)
+			{
+				centros.Add(nCen);
+			}
+			else
+			{
+				Console.WriteLine("# ERROR: Centro ya existente.");
+			}
+			return !existe;
 		}
 
-		public void nuevoVoluntario(Voluntario nVol)
+		public bool nuevoVoluntario(Voluntario nVol)
 		{
 			bool existe = false;
 			int ite = 0;
@@ -92,6 +117,32 @@ namespace COVIDA
 			}
 			else{
 				Console.WriteLine("# ERROR: Voluntario ya existente.");
+			}
+
+			return !existe;
+		}
+
+		public void nuevaDonacion(DonacionEconomica nDonacion, Centro centro){
+			bool existe = false;
+			int ite = 0;
+			while (ite < donaciones.Count && !existe)
+			{
+				if (nDonacion.Id == donaciones[ite].Id)
+				{
+					existe = true;
+				}
+
+				ite++;
+			}
+
+			if (!existe)
+			{
+				donaciones.Add(nDonacion);
+				centro.recibirDonacion(nDonacion);
+			}
+			else
+			{
+				Console.WriteLine("# ERROR: Donacion ya existente.");
 			}
 		}
 
@@ -127,24 +178,42 @@ namespace COVIDA
 			return centro;
 		}
 
-        public Producto getProductoById(string id)
-        {
-            int elId = Int32.Parse(id);
-            bool encontrado = false;
-            Producto producto = null;
-            int i = 0;
-            while (!encontrado && i < productos.Count)
-            {
-                if (productos[i].Id == elId)
-                {
-                    producto = productos[i];
-                    encontrado = true;
-                }
-                i++;
-            }
-            return producto;
-        }
-		
+		public Producto getProductoById(string id)
+		{
+			int elId = Int32.Parse(id);
+			bool encontrado = false;
+			Producto producto = null;
+			int i = 0;
+			while (!encontrado && i < productos.Count)
+			{
+				if (productos[i].Id == elId)
+				{
+					producto = productos[i];
+					encontrado = true;
+				}
+				i++;
+			}
+			return producto;
+		}
+
+
+		public Producto getProductoByNombre(string nombre)
+		{
+			bool encontrado = false;
+			Producto producto = null;
+			int i = 0;
+			while (!encontrado && i < productos.Count)
+			{
+				if (productos[i].Nombre == nombre)
+				{
+					producto = productos[i];
+					encontrado = true;
+				}
+				i++;
+			}
+			return producto;
+		}
+
 		public string getStrVoluntariosCentro(string cId){
 			
 			Centro centro = getCentroById(cId);
@@ -172,6 +241,8 @@ namespace COVIDA
 			nuevoProducto(new Producto("Lata arvejas", 1, 30, Producto.TipoProd.alimentoNoPerecedero));
 			nuevoProducto(new Producto("Lata arvejas", 1, 30, Producto.TipoProd.alimentoNoPerecedero));
 			nuevoProducto(new Producto("Coquita en botella de vidrio :)", 0, 110, Producto.TipoProd.bebida));
+			nuevoProducto(new Producto("PRODUCTO ERROR #1", 11, 0, Producto.TipoProd.productoHigiene));
+			nuevoProducto(new Producto("PRODUCTO ERROR #2", 0, 11, Producto.TipoProd.productoHigiene));
 
 		}
 
@@ -194,19 +265,99 @@ namespace COVIDA
 			Voluntario v8 = new Voluntario("Denna", 65465465, 77778888, new DateTime(1988, 9, 21));
 			Voluntario v9 = new Voluntario("Gabriela", 75375375, 99991111, new DateTime(1984, 5, 28));
 			Voluntario v10 = new Voluntario("Karen", 95195195, 15915915, new DateTime(1976, 12, 28));
+			Voluntario v11 = new Voluntario("VOLUNTARIO ERROR", 95195195, 15915915, new DateTime(1976, 12, 28));
+
+			if (nuevoVoluntario(v1))
+			{
+				centros[0].sumarVoluntario(v1);
+			}
+			if (nuevoVoluntario(v2))
+			{
+				centros[1].sumarVoluntario(v2);
+			}
+			if (nuevoVoluntario(v3))
+			{
+				centros[2].sumarVoluntario(v3);
+			}
+			if (nuevoVoluntario(v4))
+			{
+				centros[3].sumarVoluntario(v4);
+			}
+			if (nuevoVoluntario(v5))
+			{
+				centros[4].sumarVoluntario(v5);
+			}
+			if (nuevoVoluntario(v6))
+			{
+				centros[0].sumarVoluntario(v6);
+			}
+			if (nuevoVoluntario(v7))
+			{
+				centros[0].sumarVoluntario(v7);
+				centros[1].sumarVoluntario(v7);
+			}			
+			if (nuevoVoluntario(v8))
+			{
+				centros[2].sumarVoluntario(v8);
+			}		
+			if (nuevoVoluntario(v9))
+			{
+				centros[3].sumarVoluntario(v9);
+			}			
+			if (nuevoVoluntario(v10))
+			{
+				centros[4].sumarVoluntario(v10);
+			}
+			if (nuevoVoluntario(v11))
+			{
+				centros[4].sumarVoluntario(v11);
+
+			}
+		}
+
+		private void cargaDonaciones()
+		{
+			List<Producto> lProd1 = new List<Producto>();
+			lProd1.Add(productos[0]);
+			lProd1.Add(productos[0]);
+			lProd1.Add(productos[0]);
+			lProd1.Add(productos[3]);
+			lProd1.Add(productos[3]);
+			DonacionProducto donProd1 = new DonacionProducto(lProd1);
+
+			List<Producto> lProd2 = new List<Producto>();
+			lProd2.Add(productos[2]);
+			lProd2.Add(productos[2]);
+			lProd2.Add(productos[6]);
+			DateTime fecha2 = new DateTime(2020, 1, 1);
+			DonacionProducto donProd2 = new DonacionProducto(lProd2, fecha2);
+
+			List<Producto> lProd3 = new List<Producto>();
+			lProd3.Add(productos[1]);
+			lProd3.Add(productos[1]);
+			lProd3.Add(productos[1]);
+			DateTime fecha3 = new DateTime(2019, 6, 28);
+			DonacionProducto donProd3 = new DonacionProducto(lProd3, fecha3);
 
 
-			centros[0].sumarVoluntario(v1);
-			centros[0].sumarVoluntario(v6);
-			centros[0].sumarVoluntario(v7);
-			centros[1].sumarVoluntario(v2);
-			centros[1].sumarVoluntario(v7);
-			centros[2].sumarVoluntario(v3);
-			centros[2].sumarVoluntario(v8);
-			centros[3].sumarVoluntario(v4);
-			centros[3].sumarVoluntario(v9);
-			centros[4].sumarVoluntario(v5);
-			centros[4].sumarVoluntario(v10);
+			List<Producto> lProd4 = new List<Producto>();
+			lProd3.Add(productos[1]);
+			lProd3.Add(productos[1]);
+			lProd3.Add(productos[1]);
+			DateTime fecha4 = new DateTime(2020, 2, 13);
+			DonacionProducto donProd4 = new DonacionProducto(lProd4, fecha4);
+
+			DonacionEconomica donEco1 = new DonacionEconomica(15000);
+			DonacionEconomica donEco2 = new DonacionEconomica(1000, fecha2);
+
+			nuevaDonacion(donEco1, centros[0]);
+			nuevaDonacion(donProd1, centros[0]);
+			nuevaDonacion(donEco2, centros[1]);
+			nuevaDonacion(donProd2, centros[1]);
+			nuevaDonacion(donProd3, centros[2]);
+			nuevaDonacion(donProd4, centros[3]);
+
+
 		}
 
 		public string getStrDonacionByFecha(DateTime fecha)
@@ -215,15 +366,7 @@ namespace COVIDA
 
 			foreach (Centro centro in centros)
 			{
-				strDonaciones += "CENTRO: " + centro.Nombre;
-
-				if (centro.Stock.Count > 0)
-				{
-					strDonaciones += "donaciones recibidas: " + centro.Stock.Count + "\n";
-				}
-				else{
-					strDonaciones += "NO HAY DONACIONES";
-				}
+				strDonaciones += "CENTRO: " + centro.Nombre + centro.getStrDonacionesFecha(fecha);
 				
 			}
 

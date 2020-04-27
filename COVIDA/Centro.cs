@@ -118,6 +118,28 @@ namespace COVIDA
 			return strVoluntarios;
 		}
 		
+		public string getStrDonacionesFecha(DateTime fecha){
+			string strDonaciones = "# NO HAY DONACIONES";
+
+			if (stock.Count > 0)
+			{
+				int cantidad = 0;
+				foreach (DonacionEconomica donacion in stock)
+				{
+					if (donacion.Fecha == fecha)
+					{
+						cantidad++;
+					}
+				}
+				strDonaciones = "donaciones recibidas a la fecha: " + cantidad + "\n";
+			}
+
+			return strDonaciones;
+		}
+
+		public void recibirDonacion(DonacionEconomica donacion){
+			stock.Add(donacion);
+		}
 
         #endregion
     }

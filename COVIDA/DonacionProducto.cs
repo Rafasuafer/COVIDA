@@ -27,6 +27,7 @@ namespace COVIDA
 		#region Metodos
 		public DonacionProducto(List<Producto> productos, DateTime fecha) : base()
 		{
+			base.id = ultimoId++;
 			this.productos = productos;
 			base.Fecha = fecha;
 			foreach (Producto prod in productos)
