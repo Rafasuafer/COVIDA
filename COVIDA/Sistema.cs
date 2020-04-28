@@ -43,6 +43,7 @@ namespace COVIDA
 			precarga();
 		}
 
+		// Precarga de datos. Se llama al instanciar Sistema.
 		public void precarga(){
 			Console.WriteLine("### INICIO PRECARGA ### \n");
 			cargaProductos();
@@ -53,6 +54,7 @@ namespace COVIDA
 
 		}
 
+		// Recibe un producto, lo valida y si es valido, lo añade a la Lista.
 		public bool nuevoProducto(Producto nProd){
 			bool agregado = false;
 			bool peso = nProd.Peso > 0;
@@ -87,14 +89,15 @@ namespace COVIDA
 			}
 			return agregado;
 		}
-
+		
+		// Recibe un centro, lo valida y si es valido, lo añade a la Lista.
 		public bool nuevoCentro(Centro nCen)
 		{
 			bool existe = false;
 			int ite = 0;
-			while (ite < voluntarios.Count && !existe)
+			while (ite < centros.Count && !existe)
 			{
-				if (nCen.Id == centros[ite].Id)
+				if (nCen.Id == centros[ite].Id || nCen.Nombre == centros[ite].Nombre)
 				{
 					existe = true;
 				}
@@ -108,11 +111,12 @@ namespace COVIDA
 			}
 			else
 			{
-				Console.WriteLine("# ERROR: Centro ya existente.");
+				Console.WriteLine("# ERROR:" + nCen.Nombre + " Centro ya existente.");
 			}
 			return !existe;
 		}
 
+		// Recibe un voluntario, lo valida y si es valido, lo añade a la Lista.
 		public bool nuevoVoluntario(Voluntario nVol)
 		{
 			bool existe = false;
@@ -135,6 +139,7 @@ namespace COVIDA
 			return !existe;
 		}
 
+		// Recibe una donacion, la valida y si es valido, lo añade a la Lista.
 		public void nuevaDonacion(DonacionEconomica nDonacion, Centro centro){
 			bool existe = false;
 			int ite = 0;
@@ -159,7 +164,7 @@ namespace COVIDA
 			}
 		}
 
-
+		// Recibe un tipo de porudcto y retorna una lista con los productos de dicho tipo.
 		public List<Producto> getProdsByType(Producto.TipoProd tipo)
 		{
 			List<Producto> productos = new List<Producto>();
@@ -174,6 +179,7 @@ namespace COVIDA
 			return productos;
 		}
 
+		// Recibe un id por string, lo parsea y retorna el Centro que tenga ese Id, si no lo encuentra retorna null.
 		public Centro getCentroById(string id){
             int elId = int.Parse(id);
 			bool encontrado = false;
@@ -191,6 +197,7 @@ namespace COVIDA
 			return centro;
 		}
 
+		// Recibe un id por string, lo parsea y retorna el Producto que tenga ese Id, si no lo encuentra retorna null.
 		public Producto getProductoById(string id)
 		{
 			int elId = Int32.Parse(id);
@@ -209,7 +216,7 @@ namespace COVIDA
 			return producto;
 		}
 
-
+		// Recibe un nombre y retorna el Producto que tenga ese Id, si no lo encuentra retorna null.
 		public Producto getProductoByNombre(string nombre)
 		{
 			bool encontrado = false;
@@ -227,6 +234,7 @@ namespace COVIDA
 			return producto;
 		}
 
+		// Recibe el id de un centro y retorna un string con la lista de voluntarios en ese centro.
 		public string getStrVoluntariosCentro(string cId){
 			
 			Centro centro = getCentroById(cId);
@@ -258,7 +266,6 @@ namespace COVIDA
 			nuevoProducto(new Producto("PRODUCTO ERROR #2", 0, 11, Producto.TipoProd.productoHigiene));
 
 		}
-
 		private void cargaCentros(){
 			nuevoCentro(new Centro("Shopping", "Calle 13"));
 			nuevoCentro(new Centro("Hope", "18 de Julio y Bv.Artigas"));
@@ -266,8 +273,8 @@ namespace COVIDA
 			nuevoCentro(new Centro("Prado", "Aigua y Valdense"));
 			nuevoCentro(new Centro("Maroñas", "Veracierto y Chayos"));
 			nuevoCentro(new Centro("CENTRO VACIO", "Mas abajo que YPF"));
+			nuevoCentro(new Centro("CENTRO VACIO", "Mas abajo que YPF"));
 		}
-		
 		private void cargaVoluntarios(){
 			Voluntario v1 = new Voluntario("Gerardo", 12312312, 091234567, new DateTime(1978, 12, 20));
 			Voluntario v2 = new Voluntario("Alberto", 98798798, 099876543, new DateTime(1990, 1, 2));
@@ -328,7 +335,6 @@ namespace COVIDA
 
 			}
 		}
-
 		private void cargaDonaciones()
 		{
 			List<Producto> lProd1 = new List<Producto>();
@@ -374,6 +380,8 @@ namespace COVIDA
 
 		}
 
+		// Recibe una fecha y retorna un string con la cantidad de donaciones recibidas por un centro en esa fecha.
+		// Si el centro no ha recibido donaciones da un mensaje acorde.
 		public string getStrDonacionByFecha(DateTime fecha)
 		{
 			string strDonaciones = "## DONACIONES POR FECHA ## \n";
