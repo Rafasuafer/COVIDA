@@ -72,6 +72,7 @@ namespace COVIDA
 			if (precio && peso && !encontrado)
 			{
 				productos.Add(nProd);
+				agregado = true;
 			}
 			else{
 				if (encontrado)
